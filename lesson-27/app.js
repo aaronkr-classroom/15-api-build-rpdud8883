@@ -99,13 +99,14 @@ app.use((req, res, next) => {
 const mongoose = require("mongoose"); // mongoose를 요청
 
 // 데이터베이스 연결 설정
-mongoose.connect(
-  "mongodb+srv://rpdud8883:UkJIL02ocFpiaqVX@ut-node.ytjk3dp.mongodb.net/?retryWrites=true&w=majority&appName=ut-node", //Atlas 경로
-);
+mongoose.connect(`mongodb://127.0.0.1:27017/${dbName}`, {
+  useNewUrlParser: true,
+});
 
+// 연결되면 메시지를 보냄
 const db = mongoose.connection;
 db.once("open", () => {
-  console.log("Connected to MONGODB!!!");
+  console.log(`Connected to ${dbName} MongoDB using Mongoose!`);
 });
 
 /**
